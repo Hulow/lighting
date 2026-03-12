@@ -2,5 +2,4 @@
 
 class IPixelsSender {
     public:
-        virtual void init() = 0;
 };

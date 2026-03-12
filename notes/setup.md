@@ -18,6 +18,6 @@ in lighting repo: source esp-idf/export.sh
 create main/main.c
 CMakeLists.txt in root directory and in main
 
-execute idf.py build in main directory
+idf.py build 
 
 idf.py flash
