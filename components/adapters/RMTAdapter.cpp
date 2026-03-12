@@ -2,19 +2,22 @@
 #include "esp_err.h"
 
 #include "RMTAdapter.h"
+#include "RMTConfigBuilder.h"
 
 RMTAdapter::RMTAdapter() {
-    _transmitConfigs.gpio_num = GPIO_NUM_18;
-    _transmitConfigs.mem_block_symbols = 64;
-    _transmitConfigs.trans_queue_depth = 1;
-    _transmitConfigs.resolution_hz = 1000000;
-    _transmitConfigs.intr_priority = 0;
+    _transmitConfigs = RMTConfigBuilder()
+                       .gpio(18)
+                       .memBlocks(64)
+                       .queueDepth(1)
+                       .resolutionHz(1'000'000)
+                       .intrPriority(0)
+                       .build();
 
-    //check the error code hier
     esp_err_t responseCode = transmitConfigs();
     if (responseCode != ESP_OK) {
-        //TODO handle error
+        //TODO Handle response from driver
     }
+
    turnOnTransmitter();
 }
 
