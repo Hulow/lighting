@@ -7,7 +7,7 @@
 #include "RMTConfigBuilder.h"
 
 
-RMTAdapter::RMTAdapter(int gpioNum) : _gpioNum(gpioNum) {
+RMTAdapter::RMTAdapter(const int& gpioNum) : _gpioNum(gpioNum) {
     _transmitConfigs = RMTConfigBuilder(_gpioNum)
                        .clock(static_cast<rmt_clock_source_t>(RMT_CLK_SRC_APB))
                        .memBlocks(64)
@@ -20,10 +20,6 @@ RMTAdapter::RMTAdapter(int gpioNum) : _gpioNum(gpioNum) {
     printf("Response code: %d\n", responseCode);
 
     turnOnTransmitter();
-}
-
-RMTAdapter RMTAdapter::init(const int& gpioNum) {
-    return RMTAdapter(gpioNum);
 }
 
 esp_err_t RMTAdapter::transmitConfigs() {

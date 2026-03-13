@@ -5,8 +5,7 @@
 
 
 extern "C" int app_main() {
-
-    RMTAdapter adapter = RMTAdapter::init(18);
+    RMTAdapter adapterPin18(18);
 
     return 0;
 }

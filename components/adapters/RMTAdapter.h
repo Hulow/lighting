@@ -10,11 +10,10 @@ private:
     rmt_tx_channel_config_t _transmitConfigs;
     int _gpioNum;
     
-    RMTAdapter(int gpioNum);
-
+    
     esp_err_t transmitConfigs();
     void turnOnTransmitter();
 
 public:
-    static RMTAdapter init(const int& gpioNum);
+    RMTAdapter(const int& gpioNum);
 };
