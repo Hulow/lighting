@@ -2,4 +2,5 @@
 
 class IPixelsSender {
     public:
+        virtual ~IPixelsSender() = default;
 };
