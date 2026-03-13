@@ -1,29 +1,29 @@
 #include "driver/rmt_tx.h"
 #include "esp_err.h"
+#include <stdio.h>
+#include <inttypes.h>
 
 #include "RMTAdapter.h"
 #include "RMTConfigBuilder.h"
 
-RMTAdapter::RMTAdapter() {
-    _transmitConfigs = RMTConfigBuilder()
-                       .gpio(18)
+
+RMTAdapter::RMTAdapter(int gpioNum) : _gpioNum(gpioNum) {
+    _transmitConfigs = RMTConfigBuilder(_gpioNum)
+                       .clock(static_cast<rmt_clock_source_t>(RMT_CLK_SRC_APB))
                        .memBlocks(64)
                        .queueDepth(1)
-                       .resolutionHz(1'000'000)
+                       .resolutionHz(10'000'000)
                        .intrPriority(0)
                        .build();
 
     esp_err_t responseCode = transmitConfigs();
-    if (responseCode != ESP_OK) {
-        //TODO Handle response from driver
-    }
+    printf("Response code: %d\n", responseCode);
 
-   turnOnTransmitter();
+    turnOnTransmitter();
 }
 
-RMTAdapter& RMTAdapter::init() {
-    static RMTAdapter instance;
-    return instance;
+RMTAdapter RMTAdapter::init(const int& gpioNum) {
+    return RMTAdapter(gpioNum);
 }
 
 esp_err_t RMTAdapter::transmitConfigs() {
@@ -33,3 +33,7 @@ esp_err_t RMTAdapter::transmitConfigs() {
 void RMTAdapter::turnOnTransmitter() {
     rmt_enable(_channel);
 }
+
+// verschlussen
+
+
