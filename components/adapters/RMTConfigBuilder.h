@@ -52,11 +52,6 @@ public:
         return *this;
     }
 
-    RMTConfigBuilder& intrPriority(int priority) {
-        _config.intr_priority = priority;
-        return *this;
-    }
-
     rmt_tx_channel_config_t build() const {
         return _config;
     }

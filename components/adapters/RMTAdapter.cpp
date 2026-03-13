@@ -13,7 +13,6 @@ RMTAdapter::RMTAdapter(const int& gpioNum) : _gpioNum(gpioNum) {
                        .memBlocks(64)
                        .queueDepth(1)
                        .resolutionHz(10'000'000)
-                       .intrPriority(0)
                        .build();
 
     esp_err_t responseCode = transmitConfigs();
