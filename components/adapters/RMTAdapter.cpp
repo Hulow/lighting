@@ -14,11 +14,8 @@ RMTAdapter::RMTAdapter(const int& gpioNum) : _gpioNum(gpioNum) {
                        .queueDepth(1)
                        .resolutionHz(10'000'000)
                        .build();
-    
 
-    esp_err_t responseCode = transmitConfigs();
-    printf("Response code: %d\n", responseCode);
-
+    transmitConfigs();
     turnOnTransmitter();
 }
 

@@ -21,7 +21,7 @@ class WS2815Encoder {
         void encodeColor(const uint8_t& color);
         void encodeSingleBit(const uint8_t& bit);
     public:
-        WS2815Encoder(const BitToRMTMapper& mapper, const std::array<LED, N>& strip);
+        WS2815Encoder(const int& resolution, const std::array<LED, N>& strip);
         void encodeStrip();
         std::vector<rmt_symbol_word_t> getSymbols();
 };

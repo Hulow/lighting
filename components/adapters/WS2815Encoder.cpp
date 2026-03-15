@@ -3,7 +3,7 @@
 #include "WS2815Encoder.h"
 
 template <size_t N>
-WS2815Encoder<N>::WS2815Encoder(const BitToRMTMapper& mapper, const std::array<LED, N>& strip) : _mapper(mapper), _strip(strip) {
+WS2815Encoder<N>::WS2815Encoder(const int& resolution, const std::array<LED, N>& strip) : _mapper(resolution), _strip(strip) {
     _symbols.clear();
 }
 

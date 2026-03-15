@@ -11,7 +11,6 @@ private:
     rmt_transmit_config_t _transmitConfigs;
     int _gpioNum;
     
-    
     esp_err_t transmitConfigs();
     void turnOnTransmitter();
 
