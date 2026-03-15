@@ -12,7 +12,7 @@ struct LED {
 
 template <size_t N>
 
-class WS2815Encoder {
+class RMTEncoder {
     private: 
         RMTMapper _mapper;
         std::array<LED, N> _strip;
@@ -21,7 +21,7 @@ class WS2815Encoder {
         void encodeColor(const uint8_t& color);
         void encodeSingleBit(const uint8_t& bit);
     public:
-        WS2815Encoder(const int& resolution, const std::array<LED, N>& strip);
+        RMTEncoder(const int& resolution, const std::array<LED, N>& strip);
         void encodeStrip();
         std::vector<rmt_symbol_word_t> getSymbols();
 };
