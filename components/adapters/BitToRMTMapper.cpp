@@ -4,18 +4,18 @@
 
 BitToRMTMapper::BitToRMTMapper(const int& resolution) : _resolution(resolution) {}
 
-rmt_item32_t BitToRMTMapper::map(const uint8_t& bit) {
+rmt_symbol_word_t BitToRMTMapper::map(const uint8_t& bit) {
     return bit == 1 
-    ? rmt_item32_t{ 
-        .duration0 = nsToTick(WS2815Timing::T1L), 
+    ? rmt_symbol_word_t{ 
+        .duration0 = static_cast<uint16_t>(nsToTick(WS2815Timing::T1L)), 
         .level0 = 1, 
-        .duration1 = nsToTick(WS2815Timing::T1H), 
+        .duration1 = static_cast<uint16_t>(nsToTick(WS2815Timing::T1H)), 
         .level1 = 0 
     } 
-    : rmt_item32_t{ 
-        .duration0 = nsToTick(WS2815Timing::T0L), 
+    : rmt_symbol_word_t{ 
+        .duration0 = static_cast<uint16_t>(nsToTick(WS2815Timing::T0L)), 
         .level0 = 1, 
-        .duration1 = nsToTick(WS2815Timing::T0H), 
+        .duration1 = static_cast<uint16_t>(nsToTick(WS2815Timing::T0H)), 
         .level1 = 0 
     };
 }
