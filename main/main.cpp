@@ -1,6 +1,6 @@
 #include "../components/adapters/RMTAdapter.h"
 #include "../components/adapters/WS2815Encoder.h"
-#include "../components/adapters/BitToRMTMapper.h"
+#include "../components/adapters/RMTMapper.h"
 
 extern "C" int app_main() {
 

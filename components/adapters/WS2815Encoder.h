@@ -2,7 +2,7 @@
 
 #include <array> 
 #include <vector>
-#include "BitToRMTMapper.h"
+#include "RMTMapper.h"
 
 struct LED {
     uint8_t g;
@@ -14,7 +14,7 @@ template <size_t N>
 
 class WS2815Encoder {
     private: 
-        BitToRMTMapper _mapper;
+        RMTMapper _mapper;
         std::array<LED, N> _strip;
         std::vector<rmt_symbol_word_t> _symbols;
         void encodeLED(const LED& led);

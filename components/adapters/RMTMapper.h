@@ -10,11 +10,11 @@ enum WS2815Timing : uint32_t {
     T1L = 320 /* 220 ns ~ 420 ns */
 };
 
-class BitToRMTMapper {
+class RMTMapper {
     private:
         int _resolution;
         uint32_t nsToTick(uint32_t timing);
     public:
-        BitToRMTMapper(const int& resolution);
+        RMTMapper(const int& resolution);
         rmt_symbol_word_t map(const uint32_t& bit);
 };
