@@ -30,7 +30,7 @@ void WS2815Encoder<N>::encodeColor(const uint8_t& color) {
 
 template <size_t N>
 void WS2815Encoder<N>::encodeSingleBit(const uint8_t& bit) {
-    _symbols.push_back(_mapper.map(bit));
+    _symbols.push_back(_mapper.map(bit)); /* could be improved */
 }
 
 template <size_t N>

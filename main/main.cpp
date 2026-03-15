@@ -13,12 +13,8 @@ extern "C" int app_main() {
     // // );
 
     std::array<LED, 1> strip{{200, 20, 30}};
-    const std::array<LED, 1>&  refStrip = strip;
-
     BitToRMTMapper mapper(10000000);
-    const BitToRMTMapper&  refMapper = mapper;
-
-    WS2815Encoder<1> encoder(refMapper, refStrip);
+    WS2815Encoder<1> encoder(mapper, strip);
 
     encoder.encodeStrip();
 
