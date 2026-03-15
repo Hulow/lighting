@@ -20,15 +20,8 @@ extern "C" int app_main() {
 
     WS2815Encoder<1> encoder(refMapper, refStrip);
 
-    std::vector<rmt_symbol_word_t> symbols = encoder.encodeStripToSymbols();
+    encoder.encodeStrip();
 
-    for (int i=0; i<symbols.size(); i++) {
-        std::cout << symbols[i].duration0 << std::endl;
-        std::cout << symbols[i].level0 << std::endl;
-        std::cout << symbols[i].duration1 << std::endl;
-        std::cout << symbols[i].level1 << std::endl;
-    }
-
-
+    std::cout << encoder.getSymbols().size() << std::endl;
     return 0;
 }
