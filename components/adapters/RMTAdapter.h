@@ -1,5 +1,7 @@
 #pragma once
 
+#include "driver/rmt_tx.h"
+
 #include "../application/ports/IPixelsSender.h"
 
 class RMTAdapter : public IPixelsSender {

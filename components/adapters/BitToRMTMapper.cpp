@@ -4,7 +4,7 @@
 
 BitToRMTMapper::BitToRMTMapper(const int& resolution) : _resolution(resolution) {}
 
-rmt_symbol_word_t BitToRMTMapper::map(const uint8_t& bit) {
+rmt_symbol_word_t BitToRMTMapper::map(const uint32_t& bit) {
     return bit == 1 
     ? rmt_symbol_word_t{ 
         .duration0 = static_cast<uint16_t>(nsToTick(WS2815Timing::T1L)), 
@@ -20,6 +20,6 @@ rmt_symbol_word_t BitToRMTMapper::map(const uint8_t& bit) {
     };
 }
 
-uint32_t BitToRMTMapper::nsToTick(uint8_t timing) {
+uint32_t BitToRMTMapper::nsToTick(uint32_t timing) {
     return timing * _resolution / 1000000000;
 }
