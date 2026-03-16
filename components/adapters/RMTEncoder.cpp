@@ -1,6 +1,7 @@
 #include "driver/rmt_tx.h"
 #include <vector>
 #include "RMTEncoder.h"
+#include <iostream>
 
 template <size_t N>
 RMTEncoder<N>::RMTEncoder(const int& resolution, const std::array<LED, N>& strip) : _mapper(resolution), _strip(strip) {
