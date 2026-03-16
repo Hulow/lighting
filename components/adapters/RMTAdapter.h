@@ -11,7 +11,6 @@ private:
     rmt_tx_channel_config_t _channelConfigs;
     RMTEncoder<N> _encoder;
     rmt_channel_handle_t _channel;
-    rmt_transmit_config_t _transmitConfigs;
 
     void encodeStrip();
     esp_err_t transmitConfigs();

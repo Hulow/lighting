@@ -40,7 +40,7 @@ void RMTAdapter<N>::sendRMTItems(
     const void* payload,
     size_t payload_bytes
 ) {
-    _transmitConfigs = {
+    rmt_transmit_config_t transmitConfigs = {
         .loop_count = 0,
         .flags = {}
     };
@@ -49,7 +49,7 @@ void RMTAdapter<N>::sendRMTItems(
         encoder, 
         payload, 
         payload_bytes, 
-        &_transmitConfigs
+        &transmitConfigs
     );
 }
 
