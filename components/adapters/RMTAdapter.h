@@ -18,7 +18,10 @@ private:
     void turnOnTransmitter();
 
 public:
-    RMTAdapter(const rmt_tx_channel_config_t& channelConfigs, const std::array<LED, N>& strip);
+    RMTAdapter(
+        const rmt_tx_channel_config_t& channelConfigs, 
+        const std::array<LED, N>& strip
+    );
     void sendRMTItems(
         rmt_encoder_handle_t encoder,
         const void* payload,

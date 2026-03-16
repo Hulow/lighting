@@ -7,7 +7,13 @@
 #include "RMTConfigBuilder.h"
 
 template <size_t N>
-RMTAdapter<N>::RMTAdapter(const rmt_tx_channel_config_t& channelConfigs, const std::array<LED, N>& strip) : _channelConfigs(channelConfigs), _encoder(channelConfigs.resolution_hz, strip) {
+RMTAdapter<N>::RMTAdapter(
+    const rmt_tx_channel_config_t& channelConfigs, 
+    const std::array<LED, N>& strip
+) : 
+_channelConfigs(channelConfigs), 
+_encoder(channelConfigs.resolution_hz, strip)
+{
     encodeStrip();
     transmitConfigs();
     turnOnTransmitter();
