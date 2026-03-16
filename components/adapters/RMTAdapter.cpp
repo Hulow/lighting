@@ -7,20 +7,13 @@
 #include "RMTConfigBuilder.h"
 
 
-RMTAdapter::RMTAdapter(const int& gpioNum) : _gpioNum(gpioNum) {
-    _initializationConfigs = RMTConfigBuilder(_gpioNum)
-                       .clock(static_cast<rmt_clock_source_t>(RMT_CLK_SRC_DEFAULT))
-                       .memBlocks(64)
-                       .queueDepth(1)
-                       .resolutionHz(10'000'000)
-                       .build();
-
+RMTAdapter::RMTAdapter(const rmt_tx_channel_config_t& configs) : _configs(configs) {
     transmitConfigs();
     turnOnTransmitter();
 }
 
 esp_err_t RMTAdapter::transmitConfigs() {
-    return rmt_new_tx_channel(&_initializationConfigs, &_channel);
+    return rmt_new_tx_channel(&_configs, &_channel);
 }
 
 void RMTAdapter::turnOnTransmitter() {

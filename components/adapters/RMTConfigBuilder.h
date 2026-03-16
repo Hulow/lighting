@@ -5,12 +5,15 @@
 class RMTConfigBuilder {
 private:
     rmt_tx_channel_config_t _config;
-    int _gpioNum;
 
 public:
-    RMTConfigBuilder(int gpioNum) { 
+    RMTConfigBuilder() { 
         _config = {}; 
-        _config.gpio_num = static_cast<gpio_num_t>(gpioNum);
+    }
+
+    RMTConfigBuilder& gpioNum(gpio_num_t gpio_num) {
+        _config.gpio_num = gpio_num;
+        return *this;
     }
 
     RMTConfigBuilder& clock(rmt_clock_source_t clock) { //usually APB clock (80 MHz) This affects timing resolution
