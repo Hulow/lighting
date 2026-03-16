@@ -7,13 +7,13 @@
 #include "RMTConfigBuilder.h"
 
 
-RMTAdapter::RMTAdapter(const rmt_tx_channel_config_t& configs) : _configs(configs) {
+RMTAdapter::RMTAdapter(const rmt_tx_channel_config_t& channelConfigs) : _channelConfigs(channelConfigs) {
     transmitConfigs();
     turnOnTransmitter();
 }
 
 esp_err_t RMTAdapter::transmitConfigs() {
-    return rmt_new_tx_channel(&_configs, &_channel);
+    return rmt_new_tx_channel(&_channelConfigs, &_channel);
 }
 
 void RMTAdapter::turnOnTransmitter() {
