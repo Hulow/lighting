@@ -3,13 +3,15 @@
 #include "../components/adapters/RMTMapper.h"
 #include "../components/adapters/RMTConfigBuilder.h"
 #include "../components/application/Strip.h"
+#include "../components/application/Symbolizer.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include <iostream>
 
 extern "C" int app_main() {
     Strip StripOne(1, 250, 1, 10);
-    // StripOne.symbolizeStrip();
+    Symbolizer symbolizer(StripOne);
+    symbolizer.symbolize();
 
     std::array<tempLED, 26> ledsArray;
     for (size_t i = 0; i < 26; i++) {
