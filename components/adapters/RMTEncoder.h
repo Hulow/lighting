@@ -23,5 +23,5 @@ class RMTEncoder {
     public:
         RMTEncoder(const int& resolution, const std::array<LED, N>& strip);
         void encodeStrip();
-        std::vector<rmt_symbol_word_t> getSymbols();
+        const std::vector<rmt_symbol_word_t> getSymbols() const;
 };

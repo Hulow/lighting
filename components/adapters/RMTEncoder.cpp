@@ -16,9 +16,20 @@ _strip(strip)
 
 template <size_t N>
 void RMTEncoder<N>::encodeStrip() {
+    _symbols.clear();
     for (size_t led = 0; led < _strip.size(); led++) {
+        printf("starting to encode %d \n", led);
         encodeLED(_strip[led]);
     }
+    
+    rmt_symbol_word_t reset = {
+        .duration0 = 12000,
+        .level0 = 0,
+        .duration1 = 12000,
+        .level1 = 0
+    };
+
+    _symbols.push_back(reset);
 }
 
 template <size_t N>
@@ -41,7 +52,7 @@ void RMTEncoder<N>::encodeSingleBit(const uint8_t& bit) {
 }
 
 template <size_t N>
-std::vector<rmt_symbol_word_t> RMTEncoder<N>::getSymbols() {
+const std::vector<rmt_symbol_word_t> RMTEncoder<N>::getSymbols() const {
     return _symbols;
 }
 

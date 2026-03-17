@@ -13,7 +13,7 @@ enum WS2815Timing : uint32_t {
 class RMTMapper {
     private:
         int _resolution;
-        uint32_t nsToTick(uint32_t timing);
+        uint16_t nsToTick(uint32_t timing);
     public:
         RMTMapper(const int& resolution);
         rmt_symbol_word_t map(const uint32_t& bit);

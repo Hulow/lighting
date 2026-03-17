@@ -1,4 +1,5 @@
 #include "driver/rmt_tx.h"
+#include <cmath>
 
 #include "RMTMapper.h"
 
@@ -19,7 +20,7 @@ rmt_symbol_word_t RMTMapper::map(const uint32_t& bit) {
         .level1 = 0 
     };
 }
-
-uint32_t RMTMapper::nsToTick(uint32_t timing) {
-    return timing * _resolution / 1000000000;
+uint16_t RMTMapper::nsToTick(uint32_t timing) {
+    double ticks = static_cast<double>(timing) * _resolution / 1e9;
+    return static_cast<uint16_t>(std::round(ticks));
 }

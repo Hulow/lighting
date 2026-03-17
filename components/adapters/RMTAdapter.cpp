@@ -13,11 +13,7 @@ RMTAdapter<N>::RMTAdapter(
 ) : 
 _channelConfigs(channelConfigs), 
 _encoder(channelConfigs.resolution_hz, strip)
-{
-    encodeStrip();
-    transmitConfigs();
-    turnOnTransmitter();
-}
+{}
 
 template <size_t N>
 void RMTAdapter<N>::encodeStrip() {
@@ -36,21 +32,31 @@ void RMTAdapter<N>::turnOnTransmitter() {
 
 template <size_t N>
 void RMTAdapter<N>::sendRMTItems(
-    rmt_encoder_handle_t encoder,
-    const void* payload,
-    size_t payload_bytes
 ) {
-    rmt_transmit_config_t transmitConfigs = {
-        .loop_count = 0,
-        .flags = {}
-    };
-    rmt_transmit(
-        _channel, 
-        encoder, 
-        payload, 
-        payload_bytes, 
-        &transmitConfigs
+     auto symbols = _encoder.getSymbols();
+    rmt_copy_encoder_config_t config = {};
+    rmt_encoder_handle_t encoder = nullptr;
+    rmt_new_copy_encoder(&config, &encoder);
+
+     // Transmit config
+    rmt_transmit_config_t transmit_config = {};
+    transmit_config.loop_count = 0; // no loop
+
+    // Transmit
+    esp_err_t err = rmt_transmit(
+        _channel,
+        encoder,
+        symbols.data(),
+        symbols.size() * sizeof(rmt_symbol_word_t), //sizeof(symbols)
+        &transmit_config
     );
+
+    if (err != ESP_OK) {
+        printf("rmt_transmit failed: %d\n", err);
+    }
+
+    rmt_del_encoder(encoder); // cleanup
+
 }
 
 template class RMTAdapter<1>;
