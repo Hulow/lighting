@@ -1,20 +1,15 @@
 #include "Strip.h"
 
-Strip::Strip(std::vector<Led> leds) : _leds(leds) { }
+Strip::Strip(const uint8_t& green, const uint8_t& red, const uint8_t& blue, const int& ledsCount) : _green(green), _red(red), _blue(blue), _ledsCount(ledsCount) {
+    setupLeds();
+}
 
-Strip Strip::generate(uint8_t ledsCount, uint8_t green, uint8_t red, uint8_t blue) {
-    std::vector<Led> leds;
-    for (int i = 0; i < ledsCount; i++) {
-        leds.push_back(Led(green, red, blue));
+void Strip::setupLeds() {
+    for (int i = 0; i < _ledsCount; i++) {
+        _leds.push_back(Led(_green, _red, _blue));
     }
-
-    return Strip(leds);
 }
 
 const std::vector<Led>& Strip::getLeds() const {
     return _leds;
 }
-
-// void Strip::symbolizeStrip() {
-//     _symbolizer.symbolizeStrip(*this); // pass the whole strip
-// }

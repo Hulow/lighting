@@ -8,7 +8,7 @@
 #include <iostream>
 
 extern "C" int app_main() {
-    Strip StripOne = Strip::generate(26, 0, 250, 0);
+    Strip StripOne(1, 250, 1, 10);
     // StripOne.symbolizeStrip();
 
     std::array<tempLED, 26> ledsArray;

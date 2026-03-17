@@ -6,14 +6,15 @@
 
 class Strip {
 private:
-    std::vector<Led> _leds;
     uint8_t _green;
     uint8_t _red;
     uint8_t _blue;
+    int _ledsCount;
+    std::vector<Led> _leds;
 
-    Strip(std::vector<Led> leds);
+    void setupLeds();
 
 public:
-    static Strip generate(uint8_t ledsCount, uint8_t green, uint8_t red, uint8_t blue);
+    Strip(const uint8_t& green, const uint8_t& red, const uint8_t& blue, const int& ledsCount);
     const std::vector<Led>& getLeds() const;
 };
