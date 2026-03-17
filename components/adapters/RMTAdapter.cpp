@@ -2,6 +2,8 @@
 #include "esp_err.h"
 #include <stdio.h>
 #include <inttypes.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
 #include "RMTAdapter.h"
 #include "RMTConfigBuilder.h"
@@ -13,7 +15,12 @@ RMTAdapter<N>::RMTAdapter(
 ) : 
 _channelConfigs(channelConfigs), 
 _encoder(channelConfigs.resolution_hz, strip)
-{}
+{
+    _encoderConfigs = {};
+    _streamEncoder = nullptr;
+    _streamConfigs = {};
+    _streamConfigs.loop_count = 0;
+}
 
 template <size_t N>
 void RMTAdapter<N>::encodeStrip() {
@@ -34,29 +41,38 @@ template <size_t N>
 void RMTAdapter<N>::sendRMTItems(
 ) {
      auto symbols = _encoder.getSymbols();
-    rmt_copy_encoder_config_t config = {};
-    rmt_encoder_handle_t encoder = nullptr;
-    rmt_new_copy_encoder(&config, &encoder);
+    setupRulesAndStreamPosition();
 
-     // Transmit config
-    rmt_transmit_config_t transmit_config = {};
-    transmit_config.loop_count = 0; // no loop
-
-    // Transmit
     esp_err_t err = rmt_transmit(
         _channel,
-        encoder,
+        _streamEncoder,
         symbols.data(),
-        symbols.size() * sizeof(rmt_symbol_word_t), //sizeof(symbols)
-        &transmit_config
+        symbols.size() * sizeof(rmt_symbol_word_t),
+        &_streamConfigs
     );
 
     if (err != ESP_OK) {
         printf("rmt_transmit failed: %d\n", err);
     }
 
-    rmt_del_encoder(encoder); // cleanup
+    waitForRMTIdle();
+    releaseEncoder();
+}
 
+template <size_t N> 
+void RMTAdapter<N>::setupRulesAndStreamPosition() {
+    rmt_new_copy_encoder(&_encoderConfigs, &_streamEncoder);
+
+}
+
+template <size_t N> 
+void RMTAdapter<N>::releaseEncoder() {
+     rmt_del_encoder(_streamEncoder);
+}
+
+template <size_t N> 
+void RMTAdapter<N>::waitForRMTIdle() {
+    rmt_tx_wait_all_done(_channel, portMAX_DELAY);
 }
 
 template class RMTAdapter<1>;
