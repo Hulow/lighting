@@ -6,7 +6,7 @@
 template <size_t N>
 RMTEncoder<N>::RMTEncoder(
     const int& resolution, 
-    const std::array<LED, N>& strip
+    const std::array<tempLED, N>& strip
 ) : 
 _mapper(resolution), 
 _strip(strip) 
@@ -33,7 +33,7 @@ void RMTEncoder<N>::encodeStrip() {
 }
 
 template <size_t N>
-void RMTEncoder<N>::encodeLED(const LED& led) {
+void RMTEncoder<N>::encodeLED(const tempLED& led) {
     for (const uint8_t color : {led.g, led.r, led.b}) {
         encodeColor(color);
     }
@@ -56,4 +56,4 @@ const std::vector<rmt_symbol_word_t> RMTEncoder<N>::getSymbols() const {
     return _symbols;
 }
 
-template class RMTEncoder<1>;
+template class RMTEncoder<26>;

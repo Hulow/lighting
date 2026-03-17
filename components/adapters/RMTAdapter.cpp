@@ -11,7 +11,7 @@
 template <size_t N>
 RMTAdapter<N>::RMTAdapter(
     const rmt_tx_channel_config_t& channelConfigs, 
-    const std::array<LED, N>& strip
+    const std::array<tempLED, N>& strip
 ) : 
 _channelConfigs(channelConfigs), 
 _encoder(channelConfigs.resolution_hz, strip)
@@ -75,4 +75,4 @@ void RMTAdapter<N>::waitForRMTIdle() {
     rmt_tx_wait_all_done(_channel, portMAX_DELAY);
 }
 
-template class RMTAdapter<1>;
+template class RMTAdapter<26>;

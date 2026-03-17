@@ -22,7 +22,7 @@ private:
 public:
     RMTAdapter(
         const rmt_tx_channel_config_t& channelConfigs, 
-        const std::array<LED, N>& strip
+        const std::array<tempLED, N>& strip
     );
     void encodeStrip();
     esp_err_t transmitConfigs();
