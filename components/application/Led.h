@@ -14,7 +14,7 @@ class Led {
             return *this;
         }
 
-        Color getColor() {
+        Color getColor() const {
             return _color;
         }
 };

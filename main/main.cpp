@@ -8,8 +8,8 @@
 #include <iostream>
 
 extern "C" int app_main() {
-    Strip StripOne = Strip::setColor(0, 250, 0);
-    StripOne.generate(26);
+    Strip StripOne = Strip::generate(26, 0, 250, 0);
+    // StripOne.symbolizeStrip();
 
     std::array<tempLED, 26> ledsArray;
     for (size_t i = 0; i < 26; i++) {
@@ -29,9 +29,9 @@ extern "C" int app_main() {
         );
         adapterPin18.transmitConfigs();
         adapterPin18.turnOnTransmitter();
+        adapterPin18.encodeStrip();
         
     while(true) {
-        adapterPin18.encodeStrip();
         adapterPin18.sendRMTItems();
     }
     return 0;
