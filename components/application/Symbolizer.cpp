@@ -16,6 +16,7 @@ void Symbolizer::symbolizeLed(const Led& led) {
     for (uint8_t color : {led.getColor().getGreen(), led.getColor().getRed(), led.getColor().getBlue()}) {
         symbolizeColor(color);
     }
+    symbolizeResetSymbol();
 }
 
 void Symbolizer::symbolizeColor(const uint8_t& color) {
@@ -28,8 +29,16 @@ void Symbolizer::SymbolizeBit(const uint8_t& bit) {
     _symbols.push_back(mapSymbol(bit));
 }
 
+void Symbolizer::symbolizeResetSymbol() {
+     _symbols.push_back(mapResetSymbol());
+}
+
 Symbol Symbolizer::mapSymbol(const uint8_t& bit) {
     return bit == 1
         ? Symbol{ .lowDuration = _lowTimeLineSignal, .highDuration = _highTimeLineSignal }
         : Symbol{ .lowDuration = _lowTimeLineNoSignal, .highDuration = _highTimeLineNoSignal };
+}
+
+Symbol Symbolizer::mapResetSymbol() {
+    return { Symbol{.lowDuration = _lowResetDuration, .highDuration = 0}};
 }

@@ -16,10 +16,13 @@ class Symbolizer {
         uint16_t _lowTimeLineNoSignal = 1090;
         uint16_t _highTimeLineSignal = 1090;
         uint16_t _lowTimeLineSignal = 320;
+        uint16_t _lowResetDuration = 3000;
         void symbolizeLed(const Led& led);
         void symbolizeColor(const uint8_t& color);
         void SymbolizeBit(const uint8_t& bit);
         Symbol mapSymbol(const uint8_t& bit);
+        Symbol mapResetSymbol();
+        void symbolizeResetSymbol();
 
     public:
         Symbolizer(Strip& strip);
