@@ -10,13 +10,13 @@ void Symbolizer::symbolize() {
     for(int led = 0; led < _strip.getLeds().size(); led++) {
         symbolizeLed(_strip.getLeds()[led]);
     }
+    // symbolizeResetSymbol();
 }
 
 void Symbolizer::symbolizeLed(const Led& led) {
     for (uint8_t color : {led.getColor().getGreen(), led.getColor().getRed(), led.getColor().getBlue()}) {
         symbolizeColor(color);
     }
-    symbolizeResetSymbol();
 }
 
 void Symbolizer::symbolizeColor(const uint8_t& color) {
