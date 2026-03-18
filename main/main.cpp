@@ -1,15 +1,12 @@
-#include "../components/adapters/RMTAdapter.h"
-#include "../components/adapters/RMTEncoder.h"
-#include "../components/adapters/RMTMapper.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
 #include "../components/adapters/RMTConfigBuilder.h"
 #include "../components/adapters/Encoder.h"
 #include "../components/adapters/Transceiver.h"
 
 #include "../components/application/Strip.h"
 #include "../components/application/Symbolizer.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include <iostream>
 
 extern "C" int app_main() {
 
