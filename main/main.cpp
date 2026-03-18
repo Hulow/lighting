@@ -4,12 +4,14 @@
 #include "../components/adapters/ConfigsBuilder.h"
 #include "../components/adapters/Encoder.h"
 #include "../components/adapters/Transceiver.h"
+#include "../components/adapters/MemoryMonitor.h"
 
 #include "../components/application/Strip.h"
 #include "../components/application/Symbolizer.h"
 
 extern "C" int app_main() {
-
+    MemoryMonitor memoryMonitor;
+    memoryMonitor.printHeapState();
     Strip StripOne(0, 255, 0, 26);
     Symbolizer symbolizer(StripOne);
     symbolizer.symbolize();
