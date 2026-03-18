@@ -9,7 +9,7 @@ void Encoder::toRmtSymbols() {
     }
 }
 
-void Encoder::toRmtSymbol(Symbol& symbol) {
+void Encoder::toRmtSymbol(const Symbol& symbol) {
     _rmtSymbols.push_back({
         .duration0 = toRmtTick(symbol.highDuration),
         .level0 = 1,
@@ -18,11 +18,15 @@ void Encoder::toRmtSymbol(Symbol& symbol) {
    });
 }
 
-uint16_t Encoder::toRmtTick(uint16_t& timing) {
+uint16_t Encoder::toRmtTick(const uint16_t& timing) {
     double ticks = static_cast<double>(timing) * _resolution / 1e9;
     return static_cast<uint16_t>(std::round(ticks));
 }
 
 const std::vector<rmt_symbol_word_t> Encoder::getRmtSymbols() {
     return _rmtSymbols;
+}
+
+void Encoder::updateSymbols(const std::vector<Symbol>& symbols) {
+    _symbols = symbols;
 }

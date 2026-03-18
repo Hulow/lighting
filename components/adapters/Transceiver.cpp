@@ -5,7 +5,7 @@
 #include "Transceiver.h"
 
 /* TODO: remove properties from constructor */
-Transceiver::Transceiver(const rmt_tx_channel_config_t& channelConfigs, const std::vector<rmt_symbol_word_t>& symbols) : _channelConfigs(channelConfigs), _symbols(symbols) {
+Transceiver::Transceiver(const rmt_tx_channel_config_t& channelConfigs) : _channelConfigs(channelConfigs) {
      _encoderConfigs = {};
     _streamEncoder = nullptr;
     _streamConfigs = {};
@@ -21,14 +21,14 @@ void Transceiver::turnOnTransmitter() {
 }
 
 /* TODO: Handle errors */
-void Transceiver::transmit() {
+void Transceiver::transmit(const std::vector<rmt_symbol_word_t>& symbols) {
     setupRulesAndStreamPosition();
 
     esp_err_t err = rmt_transmit(
         _channel,
         _streamEncoder,
-        _symbols.data(),
-        _symbols.size() * sizeof(rmt_symbol_word_t),
+        symbols.data(),
+        symbols.size() * sizeof(rmt_symbol_word_t),
         &_streamConfigs
     );
 

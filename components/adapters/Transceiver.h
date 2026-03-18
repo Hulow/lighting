@@ -10,14 +10,13 @@ class Transceiver {
         rmt_copy_encoder_config_t _encoderConfigs;
         rmt_encoder_handle_t _streamEncoder;
         rmt_transmit_config_t _streamConfigs;
-        std::vector<rmt_symbol_word_t> _symbols;
         void setupRulesAndStreamPosition();
         void releaseEncoder();
         void waitForRMTIdle();
 
     public:
-        Transceiver(const rmt_tx_channel_config_t& channelConfigs, const std::vector<rmt_symbol_word_t>& symbols);
+        Transceiver(const rmt_tx_channel_config_t& channelConfigs);
         void setupConfigs();
         void turnOnTransmitter();
-        void transmit();
+        void transmit(const std::vector<rmt_symbol_word_t>& symbols);
 };

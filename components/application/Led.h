@@ -8,9 +8,15 @@ class Led {
     private:
         Color _color;
     public:
-        Led(uint8_t green, uint8_t red, uint8_t blue) : _color(green, red, blue){}
+        Led(const uint8_t& green, const uint8_t& red, const uint8_t& blue) : _color(green, red, blue) {}
 
         Color getColor() const {
             return _color;
+        }
+
+        void setColor(const uint8_t& green, const uint8_t& red, const uint8_t& blue) {
+            _color.setGreen(green);
+            _color.setRed(red);
+            _color.setBlue(blue);
         }
 };

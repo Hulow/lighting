@@ -1,13 +1,25 @@
 #include "Strip.h"
 
-Strip::Strip(const uint8_t& green, const uint8_t& red, const uint8_t& blue, const int& ledsCount) : _green(green), _red(red), _blue(blue), _ledsCount(ledsCount) {
-    setupLeds();
+Strip::Strip(const int& ledsCount) : _ledsCount(ledsCount) {
+    create();
 }
 
-void Strip::setupLeds() {
+void Strip::create() {
     for (int i = 0; i < _ledsCount; i++) {
         _leds.push_back(Led(_green, _red, _blue));
     }
+}
+
+void Strip::set(const uint8_t& green, const uint8_t& red, const uint8_t& blue) {
+    for (int led = 0; led < _leds.size(); led++) {
+        _leds[led].setColor(green, red, blue);
+    }
+}
+
+Strip Strip::init(const int& ledsCount) {
+    Strip strip(ledsCount);
+    return strip;
+    
 }
 
 const std::vector<Led>& Strip::getLeds() const {

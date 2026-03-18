@@ -22,6 +22,18 @@ class Color {
             _blue(blue) 
         {}
 
+        void setGreen(const uint8_t& green) {
+            _green = green;
+        }
+
+        void setRed(const uint8_t& red) {
+            _red = red;
+        }
+
+        void setBlue(const uint8_t& blue) {
+            _blue = blue;
+        }
+
         uint8_t getGreen() const {
             return _green;
         }

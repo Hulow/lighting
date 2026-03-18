@@ -1,6 +1,6 @@
 #include "Symbolizer.h"
 
-Symbolizer::Symbolizer(Strip& strip) : _strip(strip) {};
+Symbolizer::Symbolizer(const Strip& strip) : _strip(strip) {};
  
 const std::vector<Symbol>& Symbolizer::getSymbols() {
     return _symbols;
@@ -11,6 +11,11 @@ void Symbolizer::symbolize() {
         symbolizeLed(_strip.getLeds()[led]);
     }
     // symbolizeResetSymbol();
+}
+
+void Symbolizer::updateSymbols(const Strip& strip) {
+    _strip = strip;
+     _symbols.clear();
 }
 
 void Symbolizer::symbolizeLed(const Led& led) {

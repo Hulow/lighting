@@ -25,7 +25,8 @@ class Symbolizer {
         void symbolizeResetSymbol();
 
     public:
-        Symbolizer(Strip& strip);
+        Symbolizer(const Strip& strip);
         void symbolize();
         const std::vector<Symbol>& getSymbols();
+        void updateSymbols(const Strip& strip);
 };
