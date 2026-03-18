@@ -12,7 +12,7 @@ Transceiver::Transceiver(const rmt_tx_channel_config_t& channelConfigs, const st
     _streamConfigs.loop_count = 0;
 }
 
-void Transceiver::transmitConfigs() {
+void Transceiver::setupConfigs() {
     rmt_new_tx_channel(&_channelConfigs, &_channel);
 }
 

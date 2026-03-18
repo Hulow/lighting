@@ -17,7 +17,7 @@ class Transceiver {
 
     public:
         Transceiver(const rmt_tx_channel_config_t& channelConfigs, const std::vector<rmt_symbol_word_t>& symbols);
-        void transmitConfigs();
+        void setupConfigs();
         void turnOnTransmitter();
         void transmit();
 };
