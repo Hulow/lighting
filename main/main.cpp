@@ -1,7 +1,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-#include "../components/adapters/RMTConfigBuilder.h"
+#include "../components/adapters/ConfigsBuilder.h"
 #include "../components/adapters/Encoder.h"
 #include "../components/adapters/Transceiver.h"
 
@@ -10,11 +10,11 @@
 
 extern "C" int app_main() {
 
-    Strip StripOne(1, 250, 1, 26);
+    Strip StripOne(0, 255, 0, 26);
     Symbolizer symbolizer(StripOne);
     symbolizer.symbolize();
 
-    rmt_tx_channel_config_t configsOne = RMTConfigBuilder()
+    rmt_tx_channel_config_t configsOne = ConfigsBuilder()
         .gpioNum(GPIO_NUM_4)
         .clock(static_cast<rmt_clock_source_t>(RMT_CLK_SRC_DEFAULT))
         .memBlocks(64) //must be symbol.size()
