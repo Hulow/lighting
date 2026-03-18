@@ -10,10 +10,6 @@ class Led {
     public:
         Led(uint8_t green, uint8_t red, uint8_t blue) : _color(green, red, blue){}
 
-        Led getLed() {
-            return *this;
-        }
-
         Color getColor() const {
             return _color;
         }
