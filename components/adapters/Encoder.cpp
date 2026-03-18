@@ -1,7 +1,7 @@
 #include "Encoder.h"
 #include <cmath>
 
-Encoder::Encoder(const std::vector<Symbol> symbols, const int& resolution) : _symbols(symbols), _resolution(resolution) {}
+Encoder::Encoder(const std::vector<Symbol>& symbols, const int& resolution) : _symbols(symbols), _resolution(resolution) {}
 
 void Encoder::toRmtSymbols() {
     for (int i = 0; i < _symbols.size(); i++) {

@@ -12,7 +12,7 @@ class Encoder {
         void toRmtSymbol(Symbol& symbol);
 
     public:
-        Encoder(const std::vector<Symbol> symbols, const int& resolution);
+        Encoder(const std::vector<Symbol>& symbols, const int& resolution);
         void toRmtSymbols();
         const std::vector<rmt_symbol_word_t> getRmtSymbols();
 };     
