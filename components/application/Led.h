@@ -22,4 +22,8 @@ class Led {
         void setColor(const Color& color) {
             _color = color;
         }
+
+        std::vector<uint8_t> serializeColor() const {
+            return _color.serialize();
+        }
 };
