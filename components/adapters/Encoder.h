@@ -1,7 +1,7 @@
 #include <vector>
 #include "driver/rmt_tx.h"
 
-#include "../application/Symbolizer.h"
+#include "../application/Symbol.h"
 
 class Encoder {
     private:

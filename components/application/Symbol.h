@@ -12,4 +12,12 @@ class Symbol {
         static Symbol from(const uint16_t& lowDuration, const uint16_t& highDuration) {
             return Symbol(lowDuration, highDuration);
         }
+
+        uint16_t getLowDuration() const {
+            return _lowDuration;
+        }
+
+         uint16_t getHighDuration() const {
+            return _highDuration;
+        }
 };

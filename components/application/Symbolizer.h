@@ -2,11 +2,7 @@
 
 #include "Strip.h"
 #include "Led.h"
-
-struct Symbol {
-    uint16_t lowDuration;
-    uint16_t highDuration; 
-};
+#include "Symbol.h"
 
 class Symbolizer {
     private:

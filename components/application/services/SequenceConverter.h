@@ -8,11 +8,12 @@ class SequenceConverter {
         Timing _timing;
         std::vector<Symbol> _symbols;
 
-        void toSymbols(const std::vector<uint8_t>& bits);
+        void generateSymbols(const std::vector<uint8_t>& bits);
         Symbol toSymbol(const uint8_t& bit);
-        void addResetDuration();
+        void addResetSymbol();
     
     public: 
         SequenceConverter();
-        void convert(const Strip& strip);
+        void toSymbols(const Strip& strip);
+        std::vector<Symbol> getSymbols();
 };

@@ -1,4 +1,5 @@
 #include "Symbolizer.h"
+#include "Symbol.h"
 
 Symbolizer::Symbolizer(const Strip& strip) : _strip(strip) {};
  
@@ -39,11 +40,12 @@ void Symbolizer::symbolizeResetSymbol() {
 }
 
 Symbol Symbolizer::mapSymbol(const uint8_t& bit) {
-    return bit == 1
-        ? Symbol{ .lowDuration = _lowTimeLineSignal, .highDuration = _highTimeLineSignal }
-        : Symbol{ .lowDuration = _lowTimeLineNoSignal, .highDuration = _highTimeLineNoSignal };
+     return bit == 1
+        ? Symbol::from(_lowTimeLineSignal, _highTimeLineSignal)
+        : Symbol::from(_lowTimeLineNoSignal, _highTimeLineNoSignal);
 }
 
 Symbol Symbolizer::mapResetSymbol() {
-    return { Symbol{.lowDuration = _lowResetDuration, .highDuration = 0}};
+    return Symbol::from(_lowResetDuration, 0);
+
 }

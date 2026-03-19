@@ -6,12 +6,12 @@
 #include "../components/adapters/Transceiver.h"
 
 #include "../components/application/Strip.h"
-#include "../components/application/Symbolizer.h"
+#include "../components/application/services/SequenceConverter.h"
 
 extern "C" int app_main() {
     Strip stripOne = Strip::init(26);
-    Symbolizer symbolizer(stripOne);
-    symbolizer.symbolize();
+    SequenceConverter converter;
+    converter.toSymbols(stripOne);
 
     rmt_tx_channel_config_t configsOne = ConfigsBuilder()
         .gpioNum(GPIO_NUM_4)
@@ -21,7 +21,7 @@ extern "C" int app_main() {
         .resolutionHz(10'000'000)
         .build();
 
-    Encoder encoder(symbolizer.getSymbols(), configsOne.resolution_hz);
+    Encoder encoder(converter.getSymbols(), configsOne.resolution_hz);
     encoder.toRmtSymbols();
 
     Transceiver transceiver(configsOne);
@@ -32,11 +32,10 @@ extern "C" int app_main() {
 
     // ################### ########################## #####################
 
-    stripOne.setColor(0, 0, 255);
-    symbolizer.updateStrip(stripOne);
-    symbolizer.symbolize();
+    stripOne.setColor(0, 100, 0);
+    converter.toSymbols(stripOne);
 
-    encoder.updateSymbols(symbolizer.getSymbols());
+    encoder.updateSymbols(converter.getSymbols());
     encoder.toRmtSymbols();
 
     while(true) {

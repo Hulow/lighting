@@ -11,9 +11,9 @@ void Encoder::toRmtSymbols() {
 
 void Encoder::toRmtSymbol(const Symbol& symbol) {
     _rmtSymbols.push_back({
-        .duration0 = toRmtTick(symbol.highDuration),
+        .duration0 = toRmtTick(symbol.getHighDuration()),
         .level0 = 1,
-        .duration1 = toRmtTick(symbol.lowDuration),
+        .duration1 = toRmtTick(symbol.getLowDuration()),
         .level1 = 0
    });
 }

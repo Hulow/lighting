@@ -4,16 +4,16 @@
 
 SequenceConverter::SequenceConverter() : _timing() {};
 
-void SequenceConverter::convert(const Strip& strip) {
+void SequenceConverter::toSymbols(const Strip& strip) {
     _symbols.clear();
     for (auto& led : strip.getLeds()) {
-        toSymbols(led.serializeColor());
+        generateSymbols(led.serializeColor());
     }
-    addResetDuration(); 
+    addResetSymbol(); 
 }
 
-void SequenceConverter::toSymbols(const std::vector<uint8_t>& bits) {
-    for (const bit : bits ) {
+void SequenceConverter::generateSymbols(const std::vector<uint8_t>& bits) {
+    for (const uint8_t& bit : bits ) {
         _symbols.push_back(toSymbol(bit));
     }
 }
@@ -24,6 +24,10 @@ Symbol SequenceConverter::toSymbol(const uint8_t& bit) {
         : Symbol::from(_timing.getLowTimeLineNoSignal(), _timing.getHighTimeLineNoSignal());
 }
 
-void SequenceConverter::addResetDuration() {
+void SequenceConverter::addResetSymbol() {
     _symbols.push_back(Symbol::from(_timing.getLowResetDuration(), 0));
+}
+
+std::vector<Symbol> SequenceConverter::getSymbols() {
+    return _symbols;
 }
