@@ -4,8 +4,10 @@
 Encoder::Encoder(const std::vector<Symbol>& symbols, const int& resolution) : _symbols(symbols), _resolution(resolution) {}
 
 void Encoder::toRmtSymbols() {
-    for (int i = 0; i < _symbols.size(); i++) {
-        toRmtSymbol(_symbols[i]);
+    _rmtSymbols.clear();
+    _rmtSymbols.reserve(_symbols.size());
+    for (const auto& symbol : _symbols) {
+        toRmtSymbol(symbol);
     }
 }
 
@@ -18,16 +20,16 @@ void Encoder::toRmtSymbol(const Symbol& symbol) {
    });
 }
 
+/* unsafe */
 uint16_t Encoder::toRmtTick(const uint16_t& timing) {
     double ticks = static_cast<double>(timing) * _resolution / 1e9;
     return static_cast<uint16_t>(std::round(ticks));
 }
 
-const std::vector<rmt_symbol_word_t> Encoder::getRmtSymbols() {
+const std::vector<rmt_symbol_word_t>& Encoder::getRmtSymbols() const {
     return _rmtSymbols;
 }
 
 void Encoder::updateSymbols(const std::vector<Symbol>& symbols) {
     _symbols = symbols;
-    _rmtSymbols.clear();
 }

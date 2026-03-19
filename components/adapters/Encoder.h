@@ -14,6 +14,6 @@ class Encoder {
     public:
         Encoder(const std::vector<Symbol>& symbols, const int& resolution);
         void toRmtSymbols();
-        const std::vector<rmt_symbol_word_t> getRmtSymbols();
+        const std::vector<rmt_symbol_word_t>& getRmtSymbols() const ;
         void updateSymbols(const std::vector<Symbol>& symbols);
 };     

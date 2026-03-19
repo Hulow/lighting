@@ -1,7 +1,6 @@
 idf_component_register(
     SRCS 
         "Strip.cpp" 
-        "Symbolizer.cpp"
         "services/SequenceConverter.cpp"
     INCLUDE_DIRS 
         "."
