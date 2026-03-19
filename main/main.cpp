@@ -16,7 +16,7 @@ extern "C" int app_main() {
     rmt_tx_channel_config_t configsOne = ConfigsBuilder()
         .gpioNum(GPIO_NUM_4)
         .clock(static_cast<rmt_clock_source_t>(RMT_CLK_SRC_DEFAULT))
-        .memBlocks(64)
+        .memBlocks(64) //symbolizer.getSymbols().size()
         .queueDepth(1)
         .resolutionHz(10'000'000)
         .build();
@@ -32,20 +32,12 @@ extern "C" int app_main() {
 
     // ################### ########################## #####################
 
-    stripOne.setColor(0, 100, 0);
+    stripOne.setColor(0, 0, 255);
     symbolizer.updateStrip(stripOne);
     symbolizer.symbolize();
 
     encoder.updateSymbols(symbolizer.getSymbols());
     encoder.toRmtSymbols();
-
-    rmt_tx_channel_config_t configsTwo = ConfigsBuilder()
-        .gpioNum(GPIO_NUM_4)
-        .clock(static_cast<rmt_clock_source_t>(RMT_CLK_SRC_DEFAULT))
-        .memBlocks(symbolizer.getSymbols().size()) 
-        .queueDepth(1)
-        .resolutionHz(10'000'000)
-        .build();
 
     while(true) {
         transceiver.transmit(encoder.getRmtSymbols());

@@ -10,7 +10,7 @@ void Symbolizer::symbolize() {
     for(int led = 0; led < _strip.getLeds().size(); led++) {
         symbolizeLed(_strip.getLeds()[led]);
     }
-    // symbolizeResetSymbol();
+    symbolizeResetSymbol();
 }
 
 void Symbolizer::updateStrip(const Strip& strip) {
