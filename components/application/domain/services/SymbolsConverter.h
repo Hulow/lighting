@@ -3,7 +3,7 @@
 #include "../domain/Timing.h"
 #include <vector>
 
-class SequenceConverter {
+class SymbolsConverter {
     private:
         Timing _timing;
         std::vector<Symbol> _symbols;
@@ -13,7 +13,7 @@ class SequenceConverter {
         void addResetSymbol();
     
     public: 
-        SequenceConverter();
+        SymbolsConverter();
         void toSymbols(const Strip& strip);
         std::vector<Symbol> getSymbols();
 };
