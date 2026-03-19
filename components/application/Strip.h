@@ -15,6 +15,6 @@ private:
 
 public:
     static Strip init(const int& ledsCount);
-    void set(const uint8_t& green, const uint8_t& red, const uint8_t& blue);
+    void setColor(const uint8_t& green, const uint8_t& red, const uint8_t& blue);
     const std::vector<Led>& getLeds() const;
 };

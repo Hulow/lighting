@@ -29,4 +29,5 @@ const std::vector<rmt_symbol_word_t> Encoder::getRmtSymbols() {
 
 void Encoder::updateSymbols(const std::vector<Symbol>& symbols) {
     _symbols = symbols;
+    _rmtSymbols.clear();
 }

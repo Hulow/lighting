@@ -13,7 +13,7 @@ void Symbolizer::symbolize() {
     // symbolizeResetSymbol();
 }
 
-void Symbolizer::updateSymbols(const Strip& strip) {
+void Symbolizer::updateStrip(const Strip& strip) {
     _strip = strip;
      _symbols.clear();
 }
