@@ -6,7 +6,7 @@
 #include "../components/adapters/Transceiver.h"
 
 #include "../components/application/domain/Strip.h"
-#include "../components/application/services/SequenceConverter.h"
+#include "../components/application/domain/services/SequenceConverter.h"
 
 extern "C" int app_main() {
     Strip stripOne = Strip::init(26);
