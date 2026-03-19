@@ -1,16 +1,10 @@
 #pragma once
 
-#include <cstdint>
-
 class Color {
     private:
         uint8_t _green;
         uint8_t _red;
         uint8_t _blue;
-        
-    
-    public:
-
         Color(
             uint8_t green, 
             uint8_t red, 
@@ -21,6 +15,11 @@ class Color {
             _red(red), 
             _blue(blue) 
         {}
+        
+    public:
+        static Color fromGRB(const uint8_t& green, const uint8_t& red, const uint8_t& blue) {
+            return Color(green, red, blue);
+        }
 
         void setGreen(const uint8_t& green) {
             _green = green;
