@@ -5,7 +5,7 @@
 #include "../components/adapters/Encoder.h"
 #include "../components/adapters/Transceiver.h"
 
-#include "../components/application/Strip.h"
+#include "../components/application/domain/Strip.h"
 #include "../components/application/services/SequenceConverter.h"
 
 extern "C" int app_main() {
@@ -29,16 +29,25 @@ extern "C" int app_main() {
     transceiver.turnOnTransmitter();
     transceiver.transmit(encoder.getRmtSymbols());
 
-
-    // ################### ########################## #####################
-
-    stripOne.setColor(0, 100, 0);
-    converter.toSymbols(stripOne);
-
-    encoder.updateSymbols(converter.getSymbols());
-    encoder.toRmtSymbols();
-
     while(true) {
+        stripOne.setColor(0, 255, 0);
+        converter.toSymbols(stripOne);
+        encoder.updateSymbols(converter.getSymbols());
+        encoder.toRmtSymbols();
+        transceiver.transmit(encoder.getRmtSymbols());
+        vTaskDelay(pdMS_TO_TICKS(10));
+
+        stripOne.setColor(0, 0, 0);
+        converter.toSymbols(stripOne);
+        encoder.updateSymbols(converter.getSymbols());
+        encoder.toRmtSymbols();
+        transceiver.transmit(encoder.getRmtSymbols());
+        vTaskDelay(pdMS_TO_TICKS(10000));
+
+        stripOne.setColor(0, 255, 0);
+        converter.toSymbols(stripOne);
+        encoder.updateSymbols(converter.getSymbols());
+        encoder.toRmtSymbols();
         transceiver.transmit(encoder.getRmtSymbols());
         vTaskDelay(pdMS_TO_TICKS(10));
     }

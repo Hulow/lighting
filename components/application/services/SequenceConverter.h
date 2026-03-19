@@ -1,6 +1,6 @@
-#include "../Strip.h"
-#include "../Symbol.h"
-#include "../Timing.h"
+#include "../domain/Strip.h"
+#include "../domain/Symbol.h"
+#include "../domain/Timing.h"
 #include <vector>
 
 class SequenceConverter {

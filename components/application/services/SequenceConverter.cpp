@@ -1,5 +1,5 @@
 #include "SequenceConverter.h"
-#include "../Symbol.h"
+#include "../domain/Symbol.h"
 #include <vector>
 
 SequenceConverter::SequenceConverter() : _timing() {};
