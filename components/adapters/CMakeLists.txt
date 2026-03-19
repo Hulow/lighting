@@ -1,5 +1,5 @@
 idf_component_register(
-    SRCS "Transceiver.cpp" "Encoder.cpp" "MemoryMonitor.cpp"
+    SRCS "Transceiver.cpp" "Encoder.cpp"
     INCLUDE_DIRS "."
     REQUIRES driver 
 )
