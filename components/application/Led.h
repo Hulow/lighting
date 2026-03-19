@@ -7,16 +7,17 @@
 class Led {
     private:
         Color _color;
+         Led(const Color& color) : _color(color) {}
     public:
-        Led(const uint8_t& green, const uint8_t& red, const uint8_t& blue) : _color(green, red, blue) {}
+        Led static from(const Color& color) {
+            return Led(color);
+        }
 
         Color getColor() const {
             return _color;
         }
 
-        void setColor(const uint8_t& green, const uint8_t& red, const uint8_t& blue) {
-            _color.setGreen(green);
-            _color.setRed(red);
-            _color.setBlue(blue);
+        void setColor(const Color& color) {
+            _color = color;
         }
 };
