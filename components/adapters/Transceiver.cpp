@@ -23,7 +23,16 @@ void Transceiver::turnOnTransmitter() {
 /* TODO: Handle errors */
 void Transceiver::transmit(const std::vector<rmt_symbol_word_t>& symbols) {
     setupRulesAndStreamPosition();
+    transmitToRMT(symbols);
+    waitForRMTIdle();
+    releaseEncoder();
+}
 
+void Transceiver::setupRulesAndStreamPosition() {
+    rmt_new_copy_encoder(&_encoderConfigs, &_streamEncoder);
+}
+
+void Transceiver::transmitToRMT(const std::vector<rmt_symbol_word_t>& symbols) {
     esp_err_t err = rmt_transmit(
         _channel,
         _streamEncoder,
@@ -35,20 +44,14 @@ void Transceiver::transmit(const std::vector<rmt_symbol_word_t>& symbols) {
     if (err != ESP_OK) {
         printf("rmt_transmit failed: %d\n", err);
     }
-
-    waitForRMTIdle();
-    releaseEncoder();
 }
 
-void Transceiver::setupRulesAndStreamPosition() {
-    rmt_new_copy_encoder(&_encoderConfigs, &_streamEncoder);
+void Transceiver::waitForRMTIdle() {
+    rmt_tx_wait_all_done(_channel, portMAX_DELAY);
 }
 
 void Transceiver::releaseEncoder() {
      rmt_del_encoder(_streamEncoder);
 }
 
-void Transceiver::waitForRMTIdle() {
-    rmt_tx_wait_all_done(_channel, portMAX_DELAY);
-}
 
