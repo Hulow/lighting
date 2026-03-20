@@ -2,15 +2,14 @@
 #include "freertos/task.h"
 
 #include "../components/adapters/ConfigsBuilder.h"
-#include "../components/adapters/Encoder.h"
 #include "../components/adapters/Transceiver.h"
 
 #include "../components/application/domain/Strip.h"
-#include "../components/application/domain/services/SequenceConverter.h"
+#include "../components/application/domain/services/SymbolsConverter.h"
 
 extern "C" int app_main() {
     Strip stripOne = Strip::init(26);
-    SequenceConverter converter;
+    SymbolsConverter converter;
     converter.toSymbols(stripOne);
 
     rmt_tx_channel_config_t configsOne = ConfigsBuilder()
@@ -21,34 +20,15 @@ extern "C" int app_main() {
         .resolutionHz(10'000'000)
         .build();
 
-    Encoder encoder(converter.getSymbols(), configsOne.resolution_hz);
-    encoder.toRmtSymbols();
-
     Transceiver transceiver(configsOne);
     transceiver.setupConfigs();
     transceiver.turnOnTransmitter();
-    transceiver.transmit(encoder.getRmtSymbols());
+    transceiver.transmit(converter.getSymbols());
 
     while(true) {
         stripOne.setColor(0, 255, 0);
         converter.toSymbols(stripOne);
-        encoder.updateSymbols(converter.getSymbols());
-        encoder.toRmtSymbols();
-        transceiver.transmit(encoder.getRmtSymbols());
-        vTaskDelay(pdMS_TO_TICKS(10));
-
-        stripOne.setColor(0, 0, 0);
-        converter.toSymbols(stripOne);
-        encoder.updateSymbols(converter.getSymbols());
-        encoder.toRmtSymbols();
-        transceiver.transmit(encoder.getRmtSymbols());
-        vTaskDelay(pdMS_TO_TICKS(10000));
-
-        stripOne.setColor(0, 255, 0);
-        converter.toSymbols(stripOne);
-        encoder.updateSymbols(converter.getSymbols());
-        encoder.toRmtSymbols();
-        transceiver.transmit(encoder.getRmtSymbols());
+        transceiver.transmit(converter.getSymbols());
         vTaskDelay(pdMS_TO_TICKS(10));
     }
 

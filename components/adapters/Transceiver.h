@@ -3,7 +3,9 @@
 #include "driver/rmt_tx.h"
 #include <vector>
 
-class Transceiver {
+#include "../application/ports/IPixelsSender.h"
+
+class Transceiver : public IPixelsSender{
     private: 
         rmt_tx_channel_config_t _channelConfigs;
         rmt_channel_handle_t _channel;
@@ -19,5 +21,5 @@ class Transceiver {
         Transceiver(const rmt_tx_channel_config_t& channelConfigs);
         void setupConfigs();
         void turnOnTransmitter();
-        void transmit(const std::vector<rmt_symbol_word_t>& symbols);
+        void transmit(const std::vector<Symbol>& symbols);
 };

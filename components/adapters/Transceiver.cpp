@@ -3,8 +3,9 @@
 #include "freertos/FreeRTOS.h"
 
 #include "Transceiver.h"
+#include "Encoder.h"
+#include "../application/domain/Symbol.h"
 
-/* TODO: remove properties from constructor */
 Transceiver::Transceiver(const rmt_tx_channel_config_t& channelConfigs) : _channelConfigs(channelConfigs) {
      _encoderConfigs = {};
     _streamEncoder = nullptr;
@@ -21,9 +22,11 @@ void Transceiver::turnOnTransmitter() {
 }
 
 /* TODO: Handle errors */
-void Transceiver::transmit(const std::vector<rmt_symbol_word_t>& symbols) {
+void Transceiver::transmit(const std::vector<Symbol>& symbols) {
+    Encoder encoder = Encoder::fromSymbol(symbols, _channelConfigs.resolution_hz);
+
     setupRulesAndStreamPosition();
-    transmitToRMT(symbols);
+    transmitToRMT(encoder.toRmtSymbols());
     waitForRMTIdle();
     releaseEncoder();
 }
