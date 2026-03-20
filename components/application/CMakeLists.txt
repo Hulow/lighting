@@ -2,7 +2,7 @@ idf_component_register(
     SRCS 
         "domain/Strip.cpp" 
         "domain/services/SymbolsConverter.cpp"
-        "commands/TurnOnStripCommandHandler.cpp"
+        "commands/InitializeStripCommandHandler.cpp"
     INCLUDE_DIRS 
         "."
         "domain"

@@ -6,8 +6,8 @@
 
 #include "../components/application/domain/Strip.h"
 #include "../components/application/domain/services/SymbolsConverter.h"
-#include "../components/application/commands/TurnOnStripCommand.h"
-#include "../components/application/commands/TurnOnStripCommandHandler.h"
+#include "../components/application/commands/InitializeStripCommand.h"
+#include "../components/application/commands/InitializeStripCommandHandler.h"
 
 extern "C" int app_main() {
     rmt_tx_channel_config_t configs = ConfigsBuilder()
@@ -21,8 +21,9 @@ extern "C" int app_main() {
     Transceiver transceiver(configs);
     transceiver.setupConfigs();
     transceiver.turnOnTransmitter();
-    TurnOnStripCommandHandler handler(transceiver);
-    handler.execute(TurnOnStripCommand::from(26));
+    
+    InitializeStripCommandHandler handler(transceiver);
+    handler.execute(InitializeStripCommand::from(26));
 
     while(true) {
         Strip stripOne = Strip::init(26); 
