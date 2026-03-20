@@ -1,13 +1,13 @@
-#include "TurnOnStripWithChasingCommandHandler.h"
+#include "ApplyWithChasingCommandHandler.h"
 #include "../domain/Strip.h"
 #include "../domain/Led.h"
 #include "../domain/services/SymbolsConverter.h"
-#include "TurnOnStripWithChasingCommand.h"
+#include "ApplyWithChasingCommand.h"
 #include "../domain/services/ChasingPattern.h"
 
-TurnOnStripWithChasingCommandHandler::TurnOnStripWithChasingCommandHandler(IPixelsSender& sender, ITimer& timer) : _sender(sender), _timer(timer) {};
+ApplyWithChasingCommandHandler::ApplyWithChasingCommandHandler(IPixelsSender& sender, ITimer& timer) : _sender(sender), _timer(timer) {};
 
-void TurnOnStripWithChasingCommandHandler::execute(const TurnOnStripWithChasingCommand& command) {
+void ApplyWithChasingCommandHandler::execute(const ApplyWithChasingCommand& command) {
     Strip strip = Strip::init(command.getLedsCount());
     strip.setColor(command.getGreen(), command.getRed(), command.getBlue());
     SymbolsConverter converter;

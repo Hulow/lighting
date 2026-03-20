@@ -5,7 +5,7 @@ idf_component_register(
         "domain/services/ChasingPattern.cpp"
         "commands/InitializeCommandHandler.cpp"
         "commands/ApplyCommandHandler.cpp"
-        "commands/TurnOnStripWithChasingCommandHandler.cpp"
+        "commands/ApplyWithChasingCommandHandler.cpp"
     INCLUDE_DIRS 
         "."
         "domain"

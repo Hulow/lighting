@@ -2,17 +2,17 @@
 
 #include <cstdint>
 
-class TurnOnStripWithChasingCommand {
+class ApplyWithChasingCommand {
     private:
         uint8_t _green;
         uint8_t _red;
         uint8_t _blue;
         int _ledsCount;
-        TurnOnStripWithChasingCommand(const uint8_t& green, const uint8_t& red, const uint8_t& blue, const int& ledsCount) : _green(green), _red(red), _blue(blue), _ledsCount(ledsCount) {}
+        ApplyWithChasingCommand(const uint8_t& green, const uint8_t& red, const uint8_t& blue, const int& ledsCount) : _green(green), _red(red), _blue(blue), _ledsCount(ledsCount) {}
     
     public:
-        TurnOnStripWithChasingCommand static from(const uint8_t& green, const uint8_t& red, const uint8_t& blue, const int& ledsCount) {
-            return TurnOnStripWithChasingCommand(green, red, blue, ledsCount);
+        ApplyWithChasingCommand static from(const uint8_t& green, const uint8_t& red, const uint8_t& blue, const int& ledsCount) {
+            return ApplyWithChasingCommand(green, red, blue, ledsCount);
         }
 
         int getLedsCount() const {
