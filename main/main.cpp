@@ -14,22 +14,20 @@
 
 
 extern "C" int app_main() {
-    rmt_tx_channel_config_t configs = ConfigsBuilder()
-        .gpioNum(GPIO_NUM_4)
+    ConfigsBuilder baseConfigs = ConfigsBuilder()
         .clock(static_cast<rmt_clock_source_t>(RMT_CLK_SRC_DEFAULT))
         .memBlocks(64) //symbolizer.getSymbols().size()
         .queueDepth(1)
-        .resolutionHz(10'000'000)
-        .build();
+        .resolutionHz(10'000'000);
 
-    Transceiver transceiver(configs);
-    transceiver.setupConfigs();
-    transceiver.turnOnTransmitter();
+    Transceiver transceiverOne(baseConfigs.gpioNum(GPIO_NUM_4).build());
+    transceiverOne.setupConfigs();
+    transceiverOne.turnOnTransmitter();
     
-    InitializeStripCommandHandler initializationHandlerOne(transceiver);
+    InitializeStripCommandHandler initializationHandlerOne(transceiverOne);
     initializationHandlerOne.execute(InitializeStripCommand::from(26));
 
-    TurnOnStripCommandHandler handlerOne(transceiver);
+    TurnOnStripCommandHandler handlerOne(transceiverOne);
 
     while(true) {
         handlerOne.execute(TurnOnStripCommand::from(0, 255, 0, 26));
