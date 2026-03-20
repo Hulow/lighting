@@ -1,11 +1,12 @@
 #include "ApplyCommandHandler.h"
 #include "../domain/Strip.h"
 #include "../domain/services/SymbolsConverter.h"
-#include "ApplyCommand.h"
+#include "Command.h"
+#include "../ports/ITimer.h"
 
-ApplyCommandHandler::ApplyCommandHandler(IPixelsSender& sender) : _sender(sender) {};
+ApplyCommandHandler::ApplyCommandHandler(IPixelsSender& sender, ITimer& timer) : CommandHandler(sender, timer) {};
 
-void ApplyCommandHandler::execute(const ApplyCommand& command) {
+void ApplyCommandHandler::execute(const Command& command) {
     Strip strip = Strip::init(command.getLedsCount());
     strip.setColor(command.getGreen(), command.getRed(), command.getBlue());
     SymbolsConverter converter;

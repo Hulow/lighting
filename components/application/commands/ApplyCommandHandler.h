@@ -1,12 +1,12 @@
 #pragma once
 
 #include "../ports/IPixelsSender.h"
-#include "ApplyCommand.h"
+#include "../ports/ITimer.h"
+#include "Command.h"
+#include "CommandHandler.h"
 
-class ApplyCommandHandler {
-    private:
-        IPixelsSender& _sender;
+class ApplyCommandHandler : public CommandHandler {
     public:
-        ApplyCommandHandler(IPixelsSender& sender);
-        void execute(const ApplyCommand& command);
+        ApplyCommandHandler(IPixelsSender& sender, ITimer& timer);
+        void execute(const Command& command) override;
 };

@@ -7,7 +7,6 @@
 
 #include "../components/application/commands/InitializeCommand.h"
 #include "../components/application/commands/InitializeCommandHandler.h"
-#include "../components/application/commands/ApplyCommand.h"
 #include "../components/application/commands/ApplyCommandHandler.h"
 #include "../components/application/commands/Command.h"
 #include "../components/application/commands/ApplyWithChasingCommandHandler.h"
@@ -50,11 +49,11 @@ extern "C" int app_main() {
     InitializeCommandHandler initializationHandlerTwo(transceiverTwo);
     initializationHandlerTwo.execute(InitializeCommand::from(13));
 
-    ApplyCommandHandler handlerTwo(transceiverTwo);
+    ApplyCommandHandler handlerTwo(transceiverTwo, timer);
 
     while(true) {
         initializationHandlerOne.execute(InitializeCommand::from(13));
-        handlerTwo.execute(ApplyCommand::from(0, 255, 0, 13));
+        handlerTwo.execute(Command::from(0, 255, 0, 13));
         handlerOne.execute(Command::from(0, 255, 0, 13));
         timer.wait(10);
     }
