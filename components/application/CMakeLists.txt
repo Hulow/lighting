@@ -3,6 +3,7 @@ idf_component_register(
         "domain/Strip.cpp" 
         "domain/services/SymbolsConverter.cpp"
         "commands/InitializeStripCommandHandler.cpp"
+        "commands/TurnOnStripCommandHandler.cpp"
     INCLUDE_DIRS 
         "."
         "domain"

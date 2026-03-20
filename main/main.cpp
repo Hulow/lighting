@@ -8,6 +8,10 @@
 #include "../components/application/domain/services/SymbolsConverter.h"
 #include "../components/application/commands/InitializeStripCommand.h"
 #include "../components/application/commands/InitializeStripCommandHandler.h"
+#include "../components/application/commands/TurnOnStripCommand.h"
+#include "../components/application/commands/TurnOnStripCommandHandler.h"
+
+
 
 extern "C" int app_main() {
     rmt_tx_channel_config_t configs = ConfigsBuilder()
@@ -22,15 +26,13 @@ extern "C" int app_main() {
     transceiver.setupConfigs();
     transceiver.turnOnTransmitter();
     
-    InitializeStripCommandHandler handler(transceiver);
-    handler.execute(InitializeStripCommand::from(26));
+    InitializeStripCommandHandler initializationHandlerOne(transceiver);
+    initializationHandlerOne.execute(InitializeStripCommand::from(26));
+
+    TurnOnStripCommandHandler handlerOne(transceiver);
 
     while(true) {
-        Strip stripOne = Strip::init(26); 
-        stripOne.setColor(0, 255, 0);
-        SymbolsConverter converter;
-        converter.toSymbols(stripOne);
-        transceiver.transmit(converter.getSymbols());
+        handlerOne.execute(TurnOnStripCommand::from(0, 255, 0, 26));
         vTaskDelay(pdMS_TO_TICKS(10));
     }
 
