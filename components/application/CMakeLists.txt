@@ -2,6 +2,7 @@ idf_component_register(
     SRCS 
         "domain/Strip.cpp" 
         "domain/services/SymbolsConverter.cpp"
+        "domain/services/ChasingPattern.cpp"
         "commands/InitializeStripCommandHandler.cpp"
         "commands/TurnOnStripCommandHandler.cpp"
         "commands/TurnOnStripWithChasingCommandHandler.cpp"

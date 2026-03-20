@@ -3,6 +3,7 @@
 #include "../domain/Led.h"
 #include "../domain/services/SymbolsConverter.h"
 #include "TurnOnStripWithChasingCommand.h"
+#include "../domain/services/ChasingPattern.h"
 
 TurnOnStripWithChasingCommandHandler::TurnOnStripWithChasingCommandHandler(IPixelsSender& sender, ITimer& timer) : _sender(sender), _timer(timer) {};
 
@@ -10,11 +11,11 @@ void TurnOnStripWithChasingCommandHandler::execute(const TurnOnStripWithChasingC
     Strip strip = Strip::init(command.getLedsCount());
     strip.setColor(command.getGreen(), command.getRed(), command.getBlue());
     SymbolsConverter converter;
-    std::vector<Led> leds;
+    const std::vector<std::vector<Led>> frames = ChasingPattern::generate(strip.getLeds());
     _timer.wait(100);
-    for (const auto& led : strip.getLeds()) {
-        leds.push_back(led);
-        converter.toSymbols(leds);
+
+    for (auto& frame : frames) {
+        converter.toSymbols(frame);
         _sender.transmit(converter.getSymbols());
         _timer.wait(500);
     }
