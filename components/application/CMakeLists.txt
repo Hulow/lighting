@@ -4,7 +4,7 @@ idf_component_register(
         "domain/services/SymbolsConverter.cpp"
         "domain/services/ChasingPattern.cpp"
         "commands/InitializeCommandHandler.cpp"
-        "commands/TurnOnStripCommandHandler.cpp"
+        "commands/ApplyCommandHandler.cpp"
         "commands/TurnOnStripWithChasingCommandHandler.cpp"
     INCLUDE_DIRS 
         "."

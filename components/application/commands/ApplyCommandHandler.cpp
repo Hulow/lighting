@@ -1,11 +1,11 @@
-#include "TurnOnStripCommandHandler.h"
+#include "ApplyCommandHandler.h"
 #include "../domain/Strip.h"
 #include "../domain/services/SymbolsConverter.h"
-#include "TurnOnStripCommand.h"
+#include "ApplyCommand.h"
 
-TurnOnStripCommandHandler::TurnOnStripCommandHandler(IPixelsSender& sender) : _sender(sender) {};
+ApplyCommandHandler::ApplyCommandHandler(IPixelsSender& sender) : _sender(sender) {};
 
-void TurnOnStripCommandHandler::execute(const TurnOnStripCommand& command) {
+void ApplyCommandHandler::execute(const ApplyCommand& command) {
     Strip strip = Strip::init(command.getLedsCount());
     strip.setColor(command.getGreen(), command.getRed(), command.getBlue());
     SymbolsConverter converter;

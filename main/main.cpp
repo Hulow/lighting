@@ -7,8 +7,8 @@
 
 #include "../components/application/commands/InitializeCommand.h"
 #include "../components/application/commands/InitializeCommandHandler.h"
-#include "../components/application/commands/TurnOnStripCommand.h"
-#include "../components/application/commands/TurnOnStripCommandHandler.h"
+#include "../components/application/commands/ApplyCommand.h"
+#include "../components/application/commands/ApplyCommandHandler.h"
 #include "../components/application/commands/TurnOnStripWithChasingCommand.h"
 #include "../components/application/commands/TurnOnStripWithChasingCommandHandler.h"
 
@@ -50,11 +50,11 @@ extern "C" int app_main() {
     InitializeCommandHandler initializationHandlerTwo(transceiverTwo);
     initializationHandlerTwo.execute(InitializeCommand::from(13));
 
-    TurnOnStripCommandHandler handlerTwo(transceiverTwo);
+    ApplyCommandHandler handlerTwo(transceiverTwo);
 
     while(true) {
         initializationHandlerOne.execute(InitializeCommand::from(13));
-        handlerTwo.execute(TurnOnStripCommand::from(0, 255, 0, 13));
+        handlerTwo.execute(ApplyCommand::from(0, 255, 0, 13));
         handlerOne.execute(TurnOnStripWithChasingCommand::from(0, 255, 0, 13));
         timer.wait(10);
     }
