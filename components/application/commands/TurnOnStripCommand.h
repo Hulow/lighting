@@ -4,11 +4,11 @@
 
 class TurnOnStripCommand {
     private:
-        int _ledsCount;
         uint8_t _green;
         uint8_t _red;
         uint8_t _blue;
-        TurnOnStripCommand(const uint8_t& green, const uint8_t& red, const uint8_t& blue, const int& ledsCount) : _ledsCount(ledsCount) {}
+        int _ledsCount;
+        TurnOnStripCommand(const uint8_t& green, const uint8_t& red, const uint8_t& blue, const int& ledsCount) : _green(green), _red(red), _blue(blue), _ledsCount(ledsCount) {}
     
     public:
         TurnOnStripCommand static from(const uint8_t& green, const uint8_t& red, const uint8_t& blue, const int& ledsCount) {
@@ -20,7 +20,7 @@ class TurnOnStripCommand {
         }
 
         int getGreen() const {
-            return _ledsCount;
+            return _green;
         }
 
         int getRed() const {
