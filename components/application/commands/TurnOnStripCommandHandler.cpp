@@ -6,9 +6,9 @@
 TurnOnStripCommandHandler::TurnOnStripCommandHandler(IPixelsSender& sender) : _sender(sender) {};
 
 void TurnOnStripCommandHandler::execute(const TurnOnStripCommand& command) {
-    Strip stripOne = Strip::init(command.getLedsCount());
-    stripOne.setColor(command.getGreen(), command.getRed(), command.getBlue());
+    Strip strip = Strip::init(command.getLedsCount());
+    strip.setColor(command.getGreen(), command.getRed(), command.getBlue());
     SymbolsConverter converter;
-    converter.toSymbols(stripOne);
+    converter.toSymbols(strip);
     _sender.transmit(converter.getSymbols());
 }

@@ -20,17 +20,25 @@ extern "C" int app_main() {
         .queueDepth(1)
         .resolutionHz(10'000'000);
 
-    Transceiver transceiverOne(baseConfigs.gpioNum(GPIO_NUM_4).build());
+    ConfigsBuilder configsOne = baseConfigs.gpioNum(GPIO_NUM_4);
+    Transceiver transceiverOne(configsOne.build());
     transceiverOne.setupConfigs();
     transceiverOne.turnOnTransmitter();
-    
     InitializeStripCommandHandler initializationHandlerOne(transceiverOne);
-    initializationHandlerOne.execute(InitializeStripCommand::from(26));
-
+    initializationHandlerOne.execute(InitializeStripCommand::from(13));
     TurnOnStripCommandHandler handlerOne(transceiverOne);
+
+    ConfigsBuilder configsTwo = baseConfigs.gpioNum(GPIO_NUM_5);
+    Transceiver transceiverTwo(configsTwo.build());
+    transceiverTwo.setupConfigs();
+    transceiverTwo.turnOnTransmitter();
+    InitializeStripCommandHandler initializationHandlerTwo(transceiverTwo);
+    initializationHandlerTwo.execute(InitializeStripCommand::from(13));
+    TurnOnStripCommandHandler handlerTwo(transceiverTwo);
 
     while(true) {
         handlerOne.execute(TurnOnStripCommand::from(0, 255, 0, 26));
+        handlerTwo.execute(TurnOnStripCommand::from(0, 255, 0, 26));
         vTaskDelay(pdMS_TO_TICKS(10));
     }
 
