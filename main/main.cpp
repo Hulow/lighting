@@ -6,13 +6,11 @@
 
 #include "../components/application/domain/Strip.h"
 #include "../components/application/domain/services/SymbolsConverter.h"
+#include "../components/application/commands/TurnOnStripCommand.h"
+#include "../components/application/commands/TurnOnStripCommandHandler.h"
 
 extern "C" int app_main() {
-    Strip stripOne = Strip::init(26);
-    SymbolsConverter converter;
-    converter.toSymbols(stripOne);
-
-    rmt_tx_channel_config_t configsOne = ConfigsBuilder()
+    rmt_tx_channel_config_t configs = ConfigsBuilder()
         .gpioNum(GPIO_NUM_4)
         .clock(static_cast<rmt_clock_source_t>(RMT_CLK_SRC_DEFAULT))
         .memBlocks(64) //symbolizer.getSymbols().size()
@@ -20,13 +18,16 @@ extern "C" int app_main() {
         .resolutionHz(10'000'000)
         .build();
 
-    Transceiver transceiver(configsOne);
+    Transceiver transceiver(configs);
     transceiver.setupConfigs();
     transceiver.turnOnTransmitter();
-    transceiver.transmit(converter.getSymbols());
+    TurnOnStripCommandHandler handler(transceiver);
+    handler.execute(TurnOnStripCommand::from(26));
 
     while(true) {
+        Strip stripOne = Strip::init(26); 
         stripOne.setColor(0, 255, 0);
+        SymbolsConverter converter;
         converter.toSymbols(stripOne);
         transceiver.transmit(converter.getSymbols());
         vTaskDelay(pdMS_TO_TICKS(10));
