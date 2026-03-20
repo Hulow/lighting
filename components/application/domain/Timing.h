@@ -1,8 +1,5 @@
 #pragma once
 
-#include "Strip.h"
-#include "Led.h"
-
 class Timing {
     private:
         uint16_t _highTimeLineNoSignal  = 300;

@@ -1,5 +1,6 @@
 #include "Strip.h"
 #include "Color.h"
+#include "Led.h"
 
 Strip::Strip(const int& ledsCount) : _ledsCount(ledsCount) {
     create();

@@ -3,9 +3,7 @@
 
 #include "../components/adapters/ConfigsBuilder.h"
 #include "../components/adapters/Transceiver.h"
-
 #include "../components/application/domain/Strip.h"
-#include "../components/application/domain/services/SymbolsConverter.h"
 #include "../components/application/commands/InitializeStripCommand.h"
 #include "../components/application/commands/InitializeStripCommandHandler.h"
 #include "../components/application/commands/TurnOnStripCommand.h"

@@ -1,6 +1,6 @@
-#include "../domain/Strip.h"
-#include "../domain/Symbol.h"
-#include "../domain/Timing.h"
+#include "../Led.h"
+#include "../Symbol.h"
+#include "../Timing.h"
 #include <vector>
 
 class SymbolsConverter {
@@ -14,6 +14,6 @@ class SymbolsConverter {
     
     public: 
         SymbolsConverter();
-        void toSymbols(const Strip& strip);
+        void toSymbols(const std::vector<Led>& leds);
         std::vector<Symbol> getSymbols();
 };

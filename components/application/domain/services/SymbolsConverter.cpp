@@ -1,12 +1,11 @@
 #include "SymbolsConverter.h"
-#include "../domain/Symbol.h"
 #include <vector>
 
 SymbolsConverter::SymbolsConverter() : _timing() {};
 
-void SymbolsConverter::toSymbols(const Strip& strip) {
+void SymbolsConverter::toSymbols(const std::vector<Led>& leds) {
     _symbols.clear();
-    for (auto& led : strip.getLeds()) {
+    for (auto& led : leds) {
         generateSymbols(led.serializeColor());
     }
     addResetSymbol(); 

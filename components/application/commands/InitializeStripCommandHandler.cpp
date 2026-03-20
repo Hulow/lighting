@@ -8,6 +8,6 @@ InitializeStripCommandHandler::InitializeStripCommandHandler(IPixelsSender& send
 void InitializeStripCommandHandler::execute(const InitializeStripCommand& command) {
     Strip strip = Strip::init(command.getLedsCount());
     SymbolsConverter converter;
-    converter.toSymbols(strip);
+    converter.toSymbols(strip.getLeds());
     _sender.transmit(converter.getSymbols());
 }
