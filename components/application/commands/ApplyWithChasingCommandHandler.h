@@ -2,13 +2,11 @@
 
 #include "../ports/IPixelsSender.h"
 #include "../ports/ITimer.h"
-#include "ApplyWithChasingCommand.h"
+#include "Command.h"
+#include "CommandHandler.h"
 
-class ApplyWithChasingCommandHandler {
-    private:
-        IPixelsSender& _sender;
-        ITimer& _timer;
+class ApplyWithChasingCommandHandler : public CommandHandler {
     public:
         ApplyWithChasingCommandHandler(IPixelsSender& sender, ITimer& timer);
-        void execute(const ApplyWithChasingCommand& command);
+        void execute(const Command& command) override;
 };

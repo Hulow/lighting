@@ -2,12 +2,12 @@
 #include "../domain/Strip.h"
 #include "../domain/Led.h"
 #include "../domain/services/SymbolsConverter.h"
-#include "ApplyWithChasingCommand.h"
+#include "Command.h"
 #include "../domain/services/ChasingPattern.h"
 
-ApplyWithChasingCommandHandler::ApplyWithChasingCommandHandler(IPixelsSender& sender, ITimer& timer) : _sender(sender), _timer(timer) {};
+ApplyWithChasingCommandHandler::ApplyWithChasingCommandHandler(IPixelsSender& sender, ITimer& timer) : CommandHandler(sender, timer) {};
 
-void ApplyWithChasingCommandHandler::execute(const ApplyWithChasingCommand& command) {
+void ApplyWithChasingCommandHandler::execute(const Command& command) {
     Strip strip = Strip::init(command.getLedsCount());
     strip.setColor(command.getGreen(), command.getRed(), command.getBlue());
     SymbolsConverter converter;
