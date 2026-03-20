@@ -3,6 +3,7 @@ idf_component_register(
         "domain/Strip.cpp" 
         "domain/services/SymbolsConverter.cpp"
         "domain/services/ChasingPattern.cpp"
+        "commands/CommandHandler.cpp"
         "commands/InitializeCommandHandler.cpp"
         "commands/ApplyCommandHandler.cpp"
         "commands/ApplyWithChasingCommandHandler.cpp"
