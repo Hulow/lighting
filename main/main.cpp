@@ -5,8 +5,8 @@
 #include "../components/adapters/Transceiver.h"
 #include "../components/adapters/FreeRTOSTimer.h"
 
-#include "../components/application/commands/InitializeStripCommand.h"
-#include "../components/application/commands/InitializeStripCommandHandler.h"
+#include "../components/application/commands/InitializeCommand.h"
+#include "../components/application/commands/InitializeCommandHandler.h"
 #include "../components/application/commands/TurnOnStripCommand.h"
 #include "../components/application/commands/TurnOnStripCommandHandler.h"
 #include "../components/application/commands/TurnOnStripWithChasingCommand.h"
@@ -31,8 +31,8 @@ extern "C" int app_main() {
     Transceiver transceiverOne(configsOne.build());
     transceiverOne.setupConfigs();
     transceiverOne.turnOnTransmitter();
-    InitializeStripCommandHandler initializationHandlerOne(transceiverOne);
-    initializationHandlerOne.execute(InitializeStripCommand::from(13));
+    InitializeCommandHandler initializationHandlerOne(transceiverOne);
+    initializationHandlerOne.execute(InitializeCommand::from(13));
 
     FreeRTOSTimer timer;
     TurnOnStripWithChasingCommandHandler handlerOne(transceiverOne, timer);
@@ -47,13 +47,13 @@ extern "C" int app_main() {
     Transceiver transceiverTwo(configsTwo.build());
     transceiverTwo.setupConfigs();
     transceiverTwo.turnOnTransmitter();
-    InitializeStripCommandHandler initializationHandlerTwo(transceiverTwo);
-    initializationHandlerTwo.execute(InitializeStripCommand::from(13));
+    InitializeCommandHandler initializationHandlerTwo(transceiverTwo);
+    initializationHandlerTwo.execute(InitializeCommand::from(13));
 
     TurnOnStripCommandHandler handlerTwo(transceiverTwo);
 
     while(true) {
-        initializationHandlerOne.execute(InitializeStripCommand::from(13));
+        initializationHandlerOne.execute(InitializeCommand::from(13));
         handlerTwo.execute(TurnOnStripCommand::from(0, 255, 0, 13));
         handlerOne.execute(TurnOnStripWithChasingCommand::from(0, 255, 0, 13));
         timer.wait(10);

@@ -56,5 +56,3 @@ void Transceiver::waitForRMTIdle() {
 void Transceiver::releaseEncoder() {
      rmt_del_encoder(_streamEncoder);
 }
-
-
