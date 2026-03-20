@@ -2,7 +2,6 @@
 
 #include "../ports/IPixelsSender.h"
 #include "../ports/ITimer.h"
-#include "InitializeCommand.h"
 #include "Command.h"
 #include "CommandHandler.h"
 

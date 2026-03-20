@@ -5,7 +5,6 @@
 #include "../components/adapters/Transceiver.h"
 #include "../components/adapters/FreeRTOSTimer.h"
 
-#include "../components/application/commands/InitializeCommand.h"
 #include "../components/application/commands/InitializeCommandHandler.h"
 #include "../components/application/commands/ApplyCommandHandler.h"
 #include "../components/application/commands/Command.h"
