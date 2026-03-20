@@ -30,10 +30,11 @@ extern "C" int app_main() {
     Transceiver transceiverOne(configsOne.build());
     transceiverOne.setupConfigs();
     transceiverOne.turnOnTransmitter();
-    InitializeCommandHandler initializationHandlerOne(transceiverOne);
-    initializationHandlerOne.execute(InitializeCommand::from(13));
-
     FreeRTOSTimer timer;
+
+    InitializeCommandHandler initializationHandlerOne(transceiverOne, timer);
+    initializationHandlerOne.execute(Command::from(0, 0, 0, 13));
+
     ApplyWithChasingCommandHandler handlerOne(transceiverOne, timer);
 
     /*
@@ -46,13 +47,13 @@ extern "C" int app_main() {
     Transceiver transceiverTwo(configsTwo.build());
     transceiverTwo.setupConfigs();
     transceiverTwo.turnOnTransmitter();
-    InitializeCommandHandler initializationHandlerTwo(transceiverTwo);
-    initializationHandlerTwo.execute(InitializeCommand::from(13));
+    InitializeCommandHandler initializationHandlerTwo(transceiverTwo, timer);
+    initializationHandlerTwo.execute(Command::from(0, 0, 0, 13));
 
     ApplyCommandHandler handlerTwo(transceiverTwo, timer);
 
     while(true) {
-        initializationHandlerOne.execute(InitializeCommand::from(13));
+        initializationHandlerOne.execute(Command::from(0, 0, 0, 13));
         handlerTwo.execute(Command::from(0, 255, 0, 13));
         handlerOne.execute(Command::from(0, 255, 0, 13));
         timer.wait(10);

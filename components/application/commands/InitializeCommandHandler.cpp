@@ -1,11 +1,12 @@
 #include "InitializeCommandHandler.h"
+#include "ApplyCommandHandler.h"
 #include "../domain/Strip.h"
 #include "../domain/services/SymbolsConverter.h"
-#include "InitializeCommand.h"
+#include "Command.h"
 
-InitializeCommandHandler::InitializeCommandHandler(IPixelsSender& sender) : _sender(sender) {};
+InitializeCommandHandler::InitializeCommandHandler(IPixelsSender& sender, ITimer& timer) : CommandHandler(sender, timer) {};
 
-void InitializeCommandHandler::execute(const InitializeCommand& command) {
+void InitializeCommandHandler::execute(const Command& command) {
     Strip strip = Strip::init(command.getLedsCount());
     SymbolsConverter converter;
     converter.toSymbols(strip.getLeds());
